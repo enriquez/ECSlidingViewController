@@ -7,6 +7,7 @@
 //
 
 #import "FirstTopViewController.h"
+#import "SecondTopViewController.h"
 
 @implementation FirstTopViewController
 
@@ -38,7 +39,22 @@
 
 - (IBAction)revealUnderRight:(id)sender
 {
-    [self.slidingViewController anchorTopViewTo:ECLeft];
+    SecondTopViewController *secondTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SecondTop"];
+    secondTopViewController.view.frame = self.slidingViewController.view.bounds;
+    secondTopViewController.view.alpha = 0;
+    
+    // temporarily add the second top view so that we can animate it in.
+    [self.slidingViewController.view addSubview:secondTopViewController.view];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        secondTopViewController.view.alpha = 1;
+    } completion:^(BOOL finished) {
+        // remove the second top view.
+        [secondTopViewController.view removeFromSuperview];
+        
+        // let sliding view controlller take over from here
+        self.slidingViewController.topViewController = secondTopViewController;
+    }];
 }
 
 @end
