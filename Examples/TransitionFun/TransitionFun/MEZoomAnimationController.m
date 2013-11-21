@@ -27,11 +27,14 @@ static CGFloat const MEZoomAnimationScaleFactor = 0.75;
 
 @interface MEZoomAnimationController ()
 @property (nonatomic, assign) ECSlidingViewControllerOperation operation;
+@property (nonatomic, strong) UIView *topViewSnapshot;
 - (CGRect)topViewAnchoredRightFrame:(ECSlidingViewController *)slidingViewController;
 - (void)topViewStartingState:(UIView *)topView containerFrame:(CGRect)containerFrame;
 - (void)topViewAnchorRightEndState:(UIView *)topView anchoredFrame:(CGRect)anchoredFrame;
 - (void)underLeftViewStartingState:(UIView *)underLeftView containerFrame:(CGRect)containerFrame;
 - (void)underLeftViewEndState:(UIView *)underLeftView;
+- (void)freezeStatusBarToTopView:(UIView *)topView;
+- (void)removeTopViewSnapshot;
 @end
 
 @implementation MEZoomAnimationController
@@ -78,6 +81,8 @@ static CGFloat const MEZoomAnimationScaleFactor = 0.75;
     underLeftViewController.view.layer.transform = CATransform3DIdentity;
     
     if (self.operation == ECSlidingViewControllerOperationAnchorRight) {
+        [self freezeStatusBarToTopView:topView];
+        
         [containerView insertSubview:underLeftViewController.view belowSubview:topView];
         
         [self topViewStartingState:topView containerFrame:containerView.bounds];
@@ -92,6 +97,7 @@ static CGFloat const MEZoomAnimationScaleFactor = 0.75;
                 underLeftViewController.view.frame = [transitionContext initialFrameForViewController:underLeftViewController];
                 underLeftViewController.view.alpha = 1;
                 [self topViewStartingState:topView containerFrame:containerView.bounds];
+                [self removeTopViewSnapshot];
             }
             
             [transitionContext completeTransition:finished];
@@ -109,6 +115,8 @@ static CGFloat const MEZoomAnimationScaleFactor = 0.75;
                 [self underLeftViewEndState:underLeftViewController.view];
                 [self topViewAnchorRightEndState:topView anchoredFrame:[transitionContext initialFrameForViewController:topViewController]];
             } else {
+                [self removeTopViewSnapshot];
+                
                 underLeftViewController.view.alpha = 1;
                 underLeftViewController.view.layer.transform = CATransform3DIdentity;
                 [underLeftViewController.view removeFromSuperview];
@@ -151,6 +159,18 @@ static CGFloat const MEZoomAnimationScaleFactor = 0.75;
 - (void)underLeftViewEndState:(UIView *)underLeftView {
     underLeftView.alpha = 1;
     underLeftView.layer.transform = CATransform3DIdentity;
+}
+
+- (void)freezeStatusBarToTopView:(UIView *)topView {
+    self.topViewSnapshot = [[UIScreen mainScreen] snapshotViewAfterScreenUpdates:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    [topView addSubview:self.topViewSnapshot];
+}
+
+- (void)removeTopViewSnapshot {
+    [self.topViewSnapshot removeFromSuperview];
+    self.topViewSnapshot = nil;
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 
 @end
