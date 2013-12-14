@@ -24,6 +24,6 @@
 #import <UIKit/UIKit.h>
 #import "ECSlidingViewController.h"
 
-@interface METransitionsViewController : UITableViewController <ECSlidingViewControllerDelegate>
+@interface METransitionsViewController : UITableViewController <ECSlidingViewControllerDelegate, UIGestureRecognizerDelegate>
 - (IBAction)menuButtonTapped:(id)sender;
 @end

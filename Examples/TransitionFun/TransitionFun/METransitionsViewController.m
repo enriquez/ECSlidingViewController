@@ -42,6 +42,7 @@
     self.clearsSelectionOnViewWillAppear = NO;
     
     self.transitions.dynamicTransition.slidingViewController = self.slidingViewController;
+    self.slidingViewController.panGesture.delegate = self;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         NSIndexPath *defaultIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -69,6 +70,7 @@
     if (_dynamicTransitionPanGesture) return _dynamicTransitionPanGesture;
     
     _dynamicTransitionPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self.transitions.dynamicTransition action:@selector(handlePanGesture:)];
+    _dynamicTransitionPanGesture.delegate = self;
     
     return _dynamicTransitionPanGesture;
 }
@@ -118,6 +120,21 @@
         [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
     }
 }
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    if ([otherGestureRecognizer.view isKindOfClass:[UIScrollView class]]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 
 - (IBAction)menuButtonTapped:(id)sender {
     [self.slidingViewController anchorTopViewToRightAnimated:YES];
