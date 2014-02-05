@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		051BC0BF18A1C5C600DA3911 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 051BC0BE18A1C5C600DA3911 /* Storyboard.storyboard */; };
+		051BC0C218A1DE6600DA3911 /* MEDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051BC0C118A1DE6600DA3911 /* MEDetailViewController.m */; };
 		05B9672B181B2F880013CA5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B9672A181B2F880013CA5D /* Foundation.framework */; };
 		05B9672D181B2F880013CA5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B9672C181B2F880013CA5D /* CoreGraphics.framework */; };
 		05B9672F181B2F880013CA5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B9672E181B2F880013CA5D /* UIKit.framework */; };
@@ -20,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		051BC0BE18A1C5C600DA3911 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		051BC0C018A1DE6600DA3911 /* MEDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEDetailViewController.h; sourceTree = "<group>"; };
+		051BC0C118A1DE6600DA3911 /* MEDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEDetailViewController.m; sourceTree = "<group>"; };
 		05B96727181B2F880013CA5D /* BasicMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasicMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05B9672A181B2F880013CA5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		05B9672C181B2F880013CA5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -94,6 +99,9 @@
 				05FD31F71824AA1F00482982 /* MEMenuViewController.h */,
 				05FD31F81824AA1F00482982 /* MEMenuViewController.m */,
 				05B96731181B2F880013CA5D /* Supporting Files */,
+				051BC0BE18A1C5C600DA3911 /* Storyboard.storyboard */,
+				051BC0C018A1DE6600DA3911 /* MEDetailViewController.h */,
+				051BC0C118A1DE6600DA3911 /* MEDetailViewController.m */,
 			);
 			path = BasicMenu;
 			sourceTree = "<group>";
@@ -165,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05B96743181B2F880013CA5D /* Images.xcassets in Resources */,
+				051BC0BF18A1C5C600DA3911 /* Storyboard.storyboard in Resources */,
 				05B96735181B2F880013CA5D /* InfoPlist.strings in Resources */,
 				05B9673E181B2F880013CA5D /* Main.storyboard in Resources */,
 			);
@@ -213,6 +222,7 @@
 				05FD31F91824AA1F00482982 /* MEMenuViewController.m in Sources */,
 				05B9673B181B2F880013CA5D /* MEAppDelegate.m in Sources */,
 				05B96737181B2F880013CA5D /* main.m in Sources */,
+				051BC0C218A1DE6600DA3911 /* MEDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,7 +329,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BasicMenu/BasicMenu-Prefix.pch";
 				INFOPLIST_FILE = "BasicMenu/BasicMenu-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -333,7 +345,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BasicMenu/BasicMenu-Prefix.pch";
 				INFOPLIST_FILE = "BasicMenu/BasicMenu-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
